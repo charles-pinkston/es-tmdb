@@ -1,0 +1,17 @@
+<header id="header" class="navbar-inverse navbar-secondary clearfix">
+  <div class="container container-home">
+    <%= render 'layouts/logo' %>
+
+    <% if current_user.present? %>
+      <% unless controller.class.to_s.include?("Admin::") %>
+        <%= render 'layouts/main_navigation' %>
+      <% end %>
+      <%= render 'layouts/user_navigation' %>
+      <%= render 'layouts/docs_navigation' %>
+    <% end %>
+  </div>
+</header>
+
+<div id='flash'>
+  <%= flash_messages -%>
+</div>

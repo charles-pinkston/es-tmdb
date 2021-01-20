@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'pathname'
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+
+command, *rest = ARGV
+
+Dir.chdir APP_ROOT do
+  case command
+  when 'server', 's'
+    system 'docker-compose run --service-ports app foreman s -f Procfile.dev'
+  when 'bash', 'b'
+    system 'docker-compose run --rm app bash'
+  when 'console', 'c'
+    system 'docker-compose run --rm app rails console'
+  when 'run', 'r'
+    system "docker-compose run --rm app #{rest.join(' ')}"
+  when 'daemon', 'q'
+    system 'docker-compose run -d --service-ports app foreman s -f Procfile.dev'
+  when 'destroy', 'd'
+    system 'docker-compose down'
+  else
+    puts 'Unknown option (bash|b, console|c, run|r, server|s, daemon|q, destroy|d)'
+  end
+end

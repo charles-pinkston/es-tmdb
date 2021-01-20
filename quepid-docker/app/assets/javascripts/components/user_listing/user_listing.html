@@ -1,0 +1,23 @@
+<div class="item-box row">
+  <div class="col-xs-3 col-md-1">
+    <img
+      ng-src="{{ ctrl.user.avatar_url }}"
+      class="img-responsive img-rounded"
+      alt="{{ ctrl.user.display_name }}"
+    />
+  </div>
+
+  <div class="col-xs-9 col-md-11 user-info">
+    <h5 class="user-name">
+      {{ ctrl.user.display_name }}
+    </h5>
+
+    {{ ctrl.user.email }}
+
+    <span class="text-muted" ng-if="ctrl.user.pending_invite"> Pending Invitation </span>
+
+    <span class="item-actions">
+      <remove-member this-member="ctrl.user" this-team="ctrl.team"></remove-member>
+    </span>
+  </div>
+</div>
